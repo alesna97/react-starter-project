@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { Button, makeStyles, Checkbox, FormControlLabel, Link, CircularProgress } from '@material-ui/core';
-import { Field } from 'formik';
+
 import TextFieldLogin from '../../../components/FormFields/TextFieldLogin';
 import TextFieldPassword from '../../../components/FormFields/TextFieldPassword';
 
@@ -17,26 +17,26 @@ const LoginForm = ({ initialValues, onSubmit }) => {
       error = 'Email Tidak Valid !';
     }
     return error;
-  }
+  };
 
   const validatePassword = (value) => {
     let error;
 
-    if(!value) {
-      error = 'Password tidak boleh kosong !'
+    if (!value) {
+      error = 'Password tidak boleh kosong !';
     }
 
     return error;
-  }
+  };
 
-  return(
+  return (
     <Formik
       initialValues={initialValues}
-      onSubmit={ async (value, action ) => {
+      onSubmit={async (value, action) => {
         await onSubmit(value);
       }}
       component={({ submitForm, isSubmitting, errors, touched }) => (
-        <Form autoComplete="off" className={classes.container}> 
+        <Form autoComplete="off" className={classes.container}>
           <div className={classes.form}>
             <Field
               name="email"
@@ -63,16 +63,16 @@ const LoginForm = ({ initialValues, onSubmit }) => {
             <div className={classes.buttonContainer}>
               <div className={classes.buttonContainer2}>
                 <div className={classes.rememberMe}>
-                <FormControlLabel
-                  name="remember"
-                  label="Ingat Saya ?" 
-                  control={
-                    <Checkbox value="true" color="primary" />
-                  }
-                />
+                  <FormControlLabel
+                    name="remember"
+                    label="Ingat Saya ?"
+                    control={
+                      <Checkbox value="true" color="primary" />
+                    }
+                  />
                 </div>
                 <Link color="primary" href="/lupa-kata-sandi">
-                    Lupa kata sandi ?
+                  Lupa kata sandi ?
                 </Link>
               </div>
               <Button
@@ -81,10 +81,10 @@ const LoginForm = ({ initialValues, onSubmit }) => {
                 onClick={submitForm}
                 variant="contained"
                 fullWidth
-                style={{ color: 'white', marginTop: 12}}
+                style={{ color: 'white', marginTop: 12 }}
               >
                 {
-                  isSubmitting ?  <CircularProgress color="secondary" size={24} /> : 'Masuk'
+                  isSubmitting ? <CircularProgress color="secondary" size={24} /> : 'Masuk'
                 }
               </Button>
             </div>
@@ -92,22 +92,21 @@ const LoginForm = ({ initialValues, onSubmit }) => {
         </Form>
       )}
     />
-  )
+  );
 };
-
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    width: "80%", 
-    [theme.breakpoints.only("xs")]: {
-          width: "95%"
-      }
+    width: '80%',
+    [theme.breakpoints.only('xs')]: {
+      width: '95%'
+    }
   },
   container: {
-      display: "flex",
-      alignSelf: "center",
-      flexDirection: "column",
-      alignItems: "center"
+    display: 'flex',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   buttonContainer: {
     display: 'flex',
@@ -127,6 +126,6 @@ const useStyles = makeStyles((theme) => ({
 LoginForm.propTypes = ({
   initialValues: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired
-})
+});
 
 export default LoginForm;
